@@ -6,7 +6,7 @@ author:
   name: Rafael (The Artificial Engineer)
 
 # Theme (Minimal Mistakes)
-remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+remote_theme: "mmistakes/minimal-mistakes@4.16.6"
 
 # Plugins supported by GitHub Pages
 plugins:
