@@ -21,14 +21,14 @@ paginate: 5
 paginate_path: "/page:num/"
 
 # Navigation
-nav:
-  - title: Home
+main:
+  - title: "Home"
     url: /
-  - title: Engineers
+  - title: "For Engineers"
     url: /categories/engineers/
-  - title: Everyone
+  - title: "For Everyone"
     url: /categories/everyone/
-  - title: About
+  - title: "About"
     url: /about/
 
 # Layout options
@@ -38,4 +38,22 @@ breadcrumbs: true
 
 # Permalinks for posts
 permalink: /:categories/:title/
+
+# Collections
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+
+# Category and tag pages
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+# Include pages directory
+include:
+  - _pages
 
