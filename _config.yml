@@ -1,0 +1,40 @@
+title: The Artificial Engineer
+tagline: Research insights & engineering notes
+description: A two-track blog: deep technical writeups for engineers and accessible explainers for everyone.
+url: https://theartificialengineer.ai
+author:
+  name: Rafael (The Artificial Engineer)
+
+# Theme (Minimal Mistakes)
+remote_theme: "mmistakes/minimal-mistakes@4.24.0"
+
+# Plugins supported by GitHub Pages
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+paginate: 5
+paginate_path: "/page:num/"
+
+# Navigation
+nav:
+  - title: Home
+    url: /
+  - title: Engineers
+    url: /categories/engineers/
+  - title: Everyone
+    url: /categories/everyone/
+  - title: About
+    url: /about/
+
+# Layout options
+minimal_mistakes_skin: default
+search: true
+breadcrumbs: true
+
+# Permalinks for posts
+permalink: /:categories/:title/
+
