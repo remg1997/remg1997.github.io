@@ -18,7 +18,7 @@ contact_channels:
   twitter: "https://twitter.com/23rd_Conspiracy"
 
 # Theme
-theme: awesome-jekyll-theme
+remote_theme: "a-chacon/awesome-jekyll-theme"
 
 # Plugins supported by GitHub Pages
 plugins:
@@ -27,8 +27,7 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-include-cache
-  - jekyll-archives
-  - jekyll-polyglot
+  - jekyll-remote-theme
 
 paginate: 5
 paginate_path: "/page:num/"
