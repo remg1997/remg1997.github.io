@@ -2,11 +2,23 @@ title: The Artificial Engineer
 tagline: Research insights & engineering notes
 description: "A two-track blog: deep technical writeups for engineers and accessible explainers for everyone."
 url: https://theartificialengineer.ai
-author:
-  name: Rafael (The Artificial Engineer)
 
-# Theme (Minimal Mistakes)
-remote_theme: "mmistakes/minimal-mistakes@4.16.6"
+# Author information
+author:
+  name: "Rafael"
+  avatar: "https://via.placeholder.com/200x200/2196F3/FFFFFF?text=R"
+  bio: "ML Engineer | Occasionally a piano player | I love chocolate"
+  location: "Bogotá, Colombia"
+
+# Contact channels for awesome-jekyll-theme
+contact_channels:
+  email: "rafael@theartificialengineer.ai"
+  github: "https://github.com/remg1997"
+  linkedin: "https://linkedin.com/in/rafael-mosquera"
+  twitter: "https://twitter.com/23rd_Conspiracy"
+
+# Theme
+theme: awesome-jekyll-theme
 
 # Plugins supported by GitHub Pages
 plugins:
@@ -14,27 +26,17 @@ plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-remote-theme
   - jekyll-include-cache
+  - jekyll-archives
+  - jekyll-polyglot
 
 paginate: 5
 paginate_path: "/page:num/"
 
-# Navigation
-main:
-  - title: "Home"
-    url: /
-  - title: "For Engineers"
-    url: /categories/engineers/
-  - title: "For Everyone"
-    url: /categories/everyone/
-  - title: "About"
-    url: /about/
+# Navigation - awesome-jekyll-theme uses front matter for navigation
+# Pages with nav: true will appear in navbar
 
 # Layout options
-minimal_mistakes_skin: default
-search: true
-breadcrumbs: true
 
 # Permalinks for posts
 permalink: /:categories/:title/
@@ -44,6 +46,9 @@ collections:
   pages:
     output: true
     permalink: /:path/
+  projects:
+    output: true
+    permalink: /projects/:title/
 
 # Category and tag pages
 category_archive:
@@ -56,4 +61,19 @@ tag_archive:
 # Include pages directory
 include:
   - _pages
+
+# SEO settings
+locale: "en-US"
+title_separator: "-"
+
+# Language settings for awesome-jekyll-theme (multi-language capable)
+default_lang: en
+
+# Social / contact channels consumed by the theme
+rrss:
+  email: "rafael@theartificialengineer.ai"
+  github: "https://github.com/remg1997"
+  discord: "https://discord.com/users/673943171369140252"
+  linkedin: "https://linkedin.com/in/rafael-mosquera"
+  scholar: "https://scholar.google.com/citations?user=XC9DJhUAAAAJ&hl"
 

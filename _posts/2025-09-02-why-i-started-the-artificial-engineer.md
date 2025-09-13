@@ -1,13 +1,12 @@
 ---
-layout: single
+layout: post
 title: "Why I Started The Artificial Engineer"
 permalink: /why-this-blog/
 date: 2025-09-02
 categories: [everyone]
 tags: [ml-engineering, reproducibility, learning-in-public]
 excerpt: "A two-track ML blog: reproducible engineering deep dives for practitioners, and clear explainers for everyone."
-header:
-  teaser: /assets/images/artificial-engineer-teaser.png
+image: /assets/images/artificial-engineer-teaser.png
 ---
 ## The Problem
 After my 23rd attempt at debugging an inference pipeline at 2 AM on a Sunday I realized most ML tutorials end exactly where real problems begin.

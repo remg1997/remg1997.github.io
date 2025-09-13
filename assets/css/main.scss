@@ -1,0 +1,228 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+// Theme styles are provided by awesome-jekyll-theme. Add only overrides below.
+
+// Custom variables
+$primary-color: #2196F3; // AI blue
+$accent-color: #FF6B35; // Engineering orange
+$text-color: #333;
+$background-color: #ffffff;
+
+// Custom styling for The Artificial Engineer
+.masthead {
+  border-bottom: 3px solid $primary-color;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(33, 37, 41, 0.95) !important; // Dark background
+  backdrop-filter: blur(10px);
+}
+
+.site-title {
+  font-weight: 700;
+  color: $primary-color !important;
+}
+
+.site-subtitle {
+  color: $accent-color;
+  font-style: italic;
+  margin-top: 0.25em;
+}
+
+// Better navigation
+.greedy-nav {
+  .nav__list {
+    .nav__item {
+      a {
+        font-weight: 500;
+        transition: all 0.3s ease;
+        
+        &:hover {
+          color: $primary-color;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+// Homepage hero section
+.page__hero {
+  .page__title {
+    font-size: 3em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  }
+  
+  .page__lead {
+    font-size: 1.2em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  }
+}
+
+// Custom styling for category pages
+.category-header {
+  background: linear-gradient(135deg, $primary-color 0%, $accent-color 100%);
+  color: white;
+  padding: 2em 0;
+  margin-bottom: 2em;
+  text-align: center;
+  
+  h1 {
+    color: white;
+    margin-bottom: 0.5em;
+  }
+  
+  .excerpt {
+    font-size: 1.2em;
+    opacity: 0.9;
+  }
+}
+
+// Two-track styling
+.track-engineers {
+  border-left: 4px solid $primary-color;
+  padding-left: 1em;
+  
+  h2 {
+    color: $primary-color;
+  }
+}
+
+.track-everyone {
+  border-left: 4px solid $accent-color;
+  padding-left: 1em;
+  
+  h2 {
+    color: $accent-color;
+  }
+}
+
+// Post styling
+.post-meta {
+  .category-engineers {
+    background-color: $primary-color;
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  
+  .category-everyone {
+    background-color: $accent-color;
+    color: white;
+    padding: 0.25em 0.5em;
+    border-radius: 3px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+}
+
+// Custom button styling
+.btn--primary {
+  background-color: $primary-color;
+  border-color: $primary-color;
+  
+  &:hover {
+    background-color: darken($primary-color, 10%);
+    border-color: darken($primary-color, 10%);
+  }
+}
+
+// Footer customization
+.page__footer {
+  background-color: #2c3e50;
+  color: white;
+  
+  a {
+    color: $primary-color;
+    
+    &:hover {
+      color: $accent-color;
+    }
+  }
+}
+
+// Code block styling
+.highlight {
+  border-left: 4px solid $primary-color;
+}
+
+// Wide layout - use more screen space!
+.wide {
+  .page {
+    float: left;
+    width: 100%;
+  }
+  
+  .page__related {
+    float: left;
+    margin-top: 2em;
+    padding-top: 1em;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+// Make content MUCH wider by default
+.page__content,
+.page__inner-wrap {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 2em !important;
+}
+
+.archive {
+  max-width: none !important;
+  width: 100% !important;
+  
+  .archive__item {
+    width: 100% !important;
+  }
+}
+
+// Override the theme's narrow container
+.page {
+  max-width: none !important;
+  width: 100% !important;
+}
+
+// Make the main content area full width
+#main {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// Remove sidebar constraints when using wide layout
+.layout--single.layout--wide,
+.layout--archive.layout--wide,
+.layout--splash {
+  .page {
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+}
+
+// Better content width
+/* Responsive overrides simplified; theme handles breakpoints */
+
+/* End responsive overrides */
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .category-header {
+    padding: 1.5em 0;
+    
+    .excerpt {
+      font-size: 1em;
+    }
+  }
+}

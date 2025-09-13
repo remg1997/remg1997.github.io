@@ -1,7 +1,8 @@
 ---
-layout: single
+layout: default
 title: About
 permalink: /about/
+nav: true
 ---
 
 I’m a self-made Machine Learning Engineer with a background in **economics and law** and 4+ years of industry experience.  

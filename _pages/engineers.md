@@ -1,16 +1,17 @@
 ---
-layout: category
+layout: blog
 title: "For Engineers"
-permalink: /categories/engineers/
-taxonomy: engineers
-entries_layout: grid
-classes: wide
-header:
-  overlay_color: "#000"
-  overlay_filter: "0.5"
-  overlay_image: /assets/images/engineers-header.jpg
+permalink: /engineers/
+nav: true
 excerpt: "Deep technical dives, reproducible experiments, and production lessons learned the hard way."
 ---
+
+{% assign posts = site.categories.engineers %}
+{% for post in posts %}
+- [{{ post.title }}]({{ post.url }}) — {{ post.excerpt | strip_html | truncate: 140 }}
+{% endfor %}
+
+<div class="track-engineers">
 
 ## 🔧 Technical Deep Dives
 
@@ -33,3 +34,5 @@ Every post includes runnable code, detailed methodology, and honest assessments 
 ---
 
 *Have a specific engineering challenge you'd like me to tackle? Email me at rafael@theartificialengineer.ai*
+
+</div>

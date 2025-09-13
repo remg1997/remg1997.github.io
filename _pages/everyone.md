@@ -1,16 +1,17 @@
 ---
-layout: category
+layout: blog
 title: "For Everyone"
-permalink: /categories/everyone/
-taxonomy: everyone
-entries_layout: grid
-classes: wide
-header:
-  overlay_color: "#000"
-  overlay_filter: "0.5"
-  overlay_image: /assets/images/everyone-header.jpg
+permalink: /everyone/
+nav: true
 excerpt: "Clear, accessible explanations of how ML actually works and impacts our world—no PhD required."
 ---
+
+{% assign posts = site.categories.everyone %}
+{% for post in posts %}
+- [{{ post.title }}]({{ post.url }}) — {{ post.excerpt | strip_html | truncate: 140 }}
+{% endfor %}
+
+<div class="track-everyone">
 
 ## 🌍 Making ML Accessible
 
@@ -33,3 +34,5 @@ Every post prioritizes clarity over complexity, with analogies and examples that
 ---
 
 *Questions about how AI works in practice? I'd love to hear from you: rafael@theartificialengineer.ai*
+
+</div>
