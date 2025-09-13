@@ -27,7 +27,8 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
   - jekyll-include-cache
-  - jekyll-remote-theme
+  - jekyll-archives
+  - jekyll-polyglot
 
 paginate: 5
 paginate_path: "/page:num/"
