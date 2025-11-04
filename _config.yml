@@ -19,6 +19,7 @@ contact_channels:
 
 # Theme
 remote_theme: "a-chacon/awesome-jekyll-theme"
+logo: "/assets/images/artificial-engineer-teaser.png"
 
 # Plugins supported by GitHub Pages
 plugins:
