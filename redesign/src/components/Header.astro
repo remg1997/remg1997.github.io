@@ -1,0 +1,63 @@
+---
+import Container from "./Container.astro";
+import Icon from "./Icon.astro";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Posts", href: "/posts" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+];
+
+const isActive = (href: string) => {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+};
+---
+
+<header class="sticky top-0 z-40 flex w-full flex-col border-b border-border bg-surface/80 backdrop-blur-md">
+  <div class="flex w-full items-center justify-center gap-2 border-b border-border bg-bg/90 px-6 py-3">
+    <p class="text-sm text-body">
+      Subscribe for deep dives, explainers, and honest ML engineering notes.
+    </p>
+    <a href="#newsletter" class="text-accent transition-colors hover:text-accent/80" aria-label="Go to newsletter">
+      <Icon name="arrow-up-right" size={16} />
+    </a>
+  </div>
+
+  <Container as="div" class="flex items-center justify-between py-5">
+    <a href="/" class="flex items-center gap-3 text-ink" aria-label="Home">
+      <span class="grid size-9 place-items-center rounded-md bg-accent text-accent-ink">
+        <span class="font-display text-lg font-semibold leading-none">⌁</span>
+      </span>
+      <span class="font-display text-base font-semibold tracking-tight">The Artificial Engineer</span>
+    </a>
+
+    <nav class="hidden items-center gap-10 md:flex" aria-label="Main navigation">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              "text-base transition-colors",
+              isActive(item.href) ? "text-ink" : "text-muted hover:text-ink",
+            ]}
+            aria-current={isActive(item.href) ? "page" : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="/contact"
+      class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-accent px-5 py-3 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+    >
+      Contact
+      <Icon name="arrow-up-right" size={16} strokeWidth={2.25} />
+    </a>
+  </Container>
+</header>

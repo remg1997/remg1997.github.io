@@ -1,0 +1,124 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection } from "astro:content";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const featured = projects.filter((p) => p.data.featured);
+const rest = projects.filter((p) => !p.data.featured);
+
+const stats = [
+  { value: "4+", label: "Years in ML" },
+  { value: "1", label: "NeurIPS best paper" },
+  { value: "5+", label: "Published datasets" },
+  { value: "100s", label: "Citations and counting" },
+];
+
+const kinds = [
+  { label: "All", value: null, count: projects.length },
+  { label: "Publications", value: "publication", count: projects.filter((p) => p.data.kind === "publication").length },
+  { label: "Datasets", value: "dataset", count: projects.filter((p) => p.data.kind === "dataset").length },
+  { label: "Competitions", value: "competition", count: projects.filter((p) => p.data.kind === "competition").length },
+];
+---
+
+<BaseLayout
+  title="Projects"
+  description="Publications, datasets, and competitions I've contributed to — from NeurIPS papers to open data releases."
+>
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-10 py-20 lg:py-28">
+      <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">Selected work</p>
+      <h1 class="max-w-4xl font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink md:text-6xl">
+        The research, datasets, and systems I've helped ship.
+      </h1>
+      <p class="max-w-2xl text-lg text-body">
+        A running list of the papers, benchmarks, and datasets I've contributed to across four years of ML engineering — from Dynabench and People's Speech to the Prism Alignment Dataset.
+      </p>
+    </Container>
+  </section>
+
+  <section class="border-b border-border">
+    <Container as="div" class="grid grid-cols-2 gap-8 py-12 md:grid-cols-4">
+      {
+        stats.map((s) => (
+          <div class="space-y-2">
+            <p class="font-display text-4xl font-medium leading-none tracking-tight text-ink md:text-5xl">
+              {s.value}
+              <span class="text-accent">+</span>
+            </p>
+            <p class="text-sm text-muted">{s.label}</p>
+          </div>
+        ))
+      }
+    </Container>
+  </section>
+
+  {
+    projects.length === 0 ? (
+      <section>
+        <Container as="div" class="py-24 text-center">
+          <p class="text-lg text-muted">Projects coming soon.</p>
+        </Container>
+      </section>
+    ) : (
+      <>
+        <section class="border-b border-border">
+          <Container as="div" class="flex flex-col gap-10 py-16">
+            <div class="flex flex-wrap items-end justify-between gap-6">
+              <div class="space-y-3">
+                <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">Dive into the details</p>
+                <h2 class="font-display text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
+                  In-depth reports and papers.
+                </h2>
+              </div>
+              <nav class="flex flex-wrap items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface p-1.5" aria-label="Filter projects by kind">
+                {kinds.map((k) => (
+                  <button
+                    type="button"
+                    class:list={[
+                      "inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-5 py-2.5 text-sm transition-colors",
+                      k.value === null ? "bg-accent text-accent-ink" : "text-body hover:text-ink",
+                    ]}
+                  >
+                    {k.label}
+                    <span class="rounded-[var(--radius-pill)] bg-bg/40 px-2 py-0.5 text-xs text-muted">
+                      {k.count}
+                    </span>
+                  </button>
+                ))}
+              </nav>
+            </div>
+
+            {featured.length > 0 ? (
+              <div class="flex flex-col gap-6">
+                {featured.map((project) => <ProjectCard project={project} variant="featured" />)}
+              </div>
+            ) : (
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {projects.slice(0, 3).map((project) => <ProjectCard project={project} />)}
+              </div>
+            )}
+          </Container>
+        </section>
+
+        {(featured.length > 0 ? rest : projects.slice(3)).length > 0 && (
+          <section>
+            <Container as="div" class="py-16">
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {(featured.length > 0 ? rest : projects.slice(3)).map((project) => (
+                  <ProjectCard project={project} />
+                ))}
+              </div>
+            </Container>
+          </section>
+        )}
+      </>
+    )
+  }
+</BaseLayout>
