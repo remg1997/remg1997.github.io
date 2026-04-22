@@ -3,19 +3,16 @@ layout: blog
 title: "For Everyone"
 permalink: /everyone/
 nav: true
-excerpt: "Clear, accessible explanations of how ML actually works and impacts our world—no PhD required."
+footer: true
+category: everyone
+excerpt: "Clear, accessible explanations of how ML actually works and impacts our world — no PhD required."
 ---
 
-{% assign posts = site.categories.everyone %}
-{% for post in posts %}
-- [{{ post.title }}]({{ post.url }}) — {{ post.excerpt | strip_html | truncate: 140 }}
-{% endfor %}
-
-<div class="track-everyone">
+<div class="track-everyone" markdown="1">
 
 ## 🌍 Making ML Accessible
 
-This track is for curious minds who want to understand how artificial intelligence really works and affects daily life—without getting lost in technical jargon.
+This track is for curious minds who want to understand how artificial intelligence really works and affects daily life — without getting lost in technical jargon.
 
 **What you'll find here:**
 - Plain-English explanations of complex concepts
@@ -33,6 +30,6 @@ Every post prioritizes clarity over complexity, with analogies and examples that
 
 ---
 
-*Questions about how AI works in practice? I'd love to hear from you: rafael@theartificialengineer.ai*
+*Questions about how AI works in practice? I'd love to hear from you: [rafael@theartificialengineer.ai](mailto:rafael@theartificialengineer.ai)*
 
 </div>
