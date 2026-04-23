@@ -9,17 +9,17 @@ image: ./iclr-2026-mataric-human-centered-ai/hall-before-keynote.jpg
 ---
 
 ![Empty rows of chairs facing the ICLR 2026 stage before the opening keynote.](./iclr-2026-mataric-human-centered-ai/hall-before-keynote.jpg)
-*The main hall an hour before doors. You can tell a conference is serious about a talk when they start setting up the overflow seating before breakfast.*
+*The main hall half an hour before doors. You can tell a conference is serious about a talk when they start setting up the overflow seating before breakfast.*
 
-I got to the room early on purpose. The opening keynote at ICLR 2026 was Maja Mataric — USC Viterbi and Google DeepMind, one of the people who essentially built the field of socially assistive robotics — and I wanted a seat where I could see the slides without craning. The title was a mouthful: *"The Challenges of Human-Centered AI and Robotics: What We Want, Need, and Are Getting From Human-Machine Interactions."* The talk itself wasn't.
+I got to the room early on purpose. The opening keynote at ICLR 2026 was Maja Mataric — USC Viterbi and Google DeepMind, one of the people who essentially built the field of socially assistive robotics. The title was a mouthful: *"The Challenges of Human-Centered AI and Robotics: What We Want, Need, and Are Getting From Human-Machine Interactions."* The talk itself wasn't.
 
-What follows is my set of notes on her keynote, plus the connections I couldn't stop drawing while she was on stage. The ideas are hers. The emphasis is mine.
+What follows is my set of notes on her keynote, plus some thoughts.
 
 ## The question she opened with
 
 Mataric opened with something that sounds almost too simple to ask at a venue like ICLR: *why do we work on AI?*
 
-She gave two honest answers. One is intellectual curiosity — the discovery drive. The other is the "greater good" — human-centered technologies that help people. Most of us, she said, tell ourselves we're doing both. Most of the time, we're really only doing the first.
+She gave two honest answers. One is intellectual curiosity, the discovery drive. The other is the "greater good" — human-centered technologies that help people. 
 
 That framing shaped everything that came after.
 
@@ -28,9 +28,7 @@ That framing shaped everything that came after.
 
 ## Intelligence evolved inside a body. Ours didn't come from text.
 
-Her next move was the one I keep thinking about.
-
-Human intelligence, she reminded us, evolved inside a **body** and an **environment**. Language and complex reasoning weren't bootstrapped from a giant pile of tokens — they emerged from social interaction, from needing to coordinate with other embodied agents who had their own goals and their own bodies. Our cognition is, top to bottom, shaped by the fact that we have hands and faces and skin and other people.
+Human intelligence, she reminded us, evolved inside a **body** and an **environment**. Language and complex reasoning weren't bootstrapped from a giant pile of tokens, they emerged from social interaction, from needing to coordinate with other embodied agents who had their own goals and their own bodies. Our cognition is, top to bottom, shaped by the fact that we have hands and faces and skin and other people.
 
 AI, she pointed out, has none of that.
 
@@ -42,22 +40,20 @@ She wasn't arguing that language models are useless. She was arguing that "gener
 
 A slide simply asked: *how do we create machines that people will accept?*
 
-Her answer was disarmingly honest: nobody knows. But we'd better start thinking about it, because embodied AI is already showing up among us, and the human response is messier than the research papers let on.
+The answer is nobody knows. But we'd better start thinking about it, because embodied AI is already showing up among us, and the human response is messier than the research papers let on.
 
 Life-like behavior, she said, triggers two things at the same time:
 
 - **Helpfulness, empathy, relatedness** on one side.
 - **Creepiness, cognitive dissonance, and outright bullying or abuse** on the other.
 
-The line she used — *"AI is like us but not like us"* — explains a lot. We run our in-group and out-group machinery on anything that behaves like an agent. A robot that's close enough to human to feel social is also close enough to become a target for the less generous parts of how we treat each other.
-
-The design question isn't "how do we make robots that people like?" It's "how do we design for the full, ugly range of how people actually behave around things that seem alive?"
+The design question then probably "how do we design for the full, ugly range of how people actually behave around things that seem alive?"
 
 ## Socially assistive robots, and the gap between knowing and doing
 
-From there the talk narrowed into her core research area: **Socially Assistive Robotics (SAR)** — machines that help people help themselves through social interaction, with measurable outcomes.
+From there the talk narrowed into her core research area: **Socially Assistive Robotics (SAR)**, machines that help people help themselves through social interaction, with measurable outcomes.
 
-She led into it with a sentence I wrote down verbatim: *we know what we should do, but we don't do it.* Exercise, therapy, language practice, rehabilitation, taking the medication. The bottleneck in most health and education outcomes isn't information and it isn't even access — it's behavior.
+She led into it with a sentence I wrote down verbatim: *we know what we should do, but we don't do it.* Exercise, therapy, language practice, rehabilitation, taking the medication. 
 
 Her argument was that the standard toolkit can't close that gap on its own:
 
@@ -70,17 +66,17 @@ An SAR system, in her framing, needs all three at once. Real-time vision for use
 That is a stack. It is also, importantly, not a chatbot.
 
 ![Slide titled Supporting Cognitive Behavioral Therapy. Describes a 15-day study, N=38, three conditions comparing an LLM-powered SAR, an LLM-powered chatbot, and traditional CBT worksheets.](./iclr-2026-mataric-human-centered-ai/cbt-study-slide.jpg)
-*The CBT study (Mina Kian et al., arXiv 2402.17937). The SAR condition saw the highest engagement and the deepest intimacy disclosures over time — and for participants who walked in with elevated pre-session anxiety, the robot plus chatbot setup was the most effective. Her line: "Now an NIH clinical RCT to evaluate at scale and develop personalization methods that improve health outcomes."*
+*The CBT study (Mina Kian et al., arXiv 2402.17937).
 
 ## Why the body keeps mattering
 
 One of the strongest moments of the talk was when she put up a meta-analysis of embodiment studies. The summary, delivered flatly: **embodied interactions lead to better learning, training, and health outcomes than non-embodied ones.** Not a little better. Consistently better, across studies, across domains.
 
-She showed a clip of babies mirroring a physical robot — the kind of imitation behavior you see between infants and other humans. The same clip on a screen doesn't produce it. The body isn't decoration. It's what the social brain is actually reaching for.
+She showed a clip of babies mirroring a physical robot, the kind of imitation behavior you see between infants and other humans. The same clip on a screen doesn't produce it. The body isn't decoration, but rather what the social brain is actually reaching for.
 
 Which led her to a question that's going to be controversial for a certain slice of the industry: *what is the right embodiment?*
 
-Her answer, again blunt: **humanoids aren't it.** The more human-shaped you make a robot, the more people expect of it — and the harder it crashes when it fails to meet those expectations. Humanoid form induces disappointment almost by construction. The right embodiment for an assistive robot is the one that sets the right expectations, not the one that looks the most like us.
+Her answer, again blunt: **humanoids aren't it.** The more human-shaped you make a robot, the more people expect of it, and the harder it crashes when it fails to meet those expectations. Humanoid form induces disappointment almost by construction. The right embodiment for an assistive robot is the one that sets the right expectations, not the one that looks the most like us.
 
 ## Personality, empathy, and where foundation models come up short
 
@@ -95,9 +91,3 @@ Then a slide that I suspect will get quoted a lot: *foundation models can't unde
 ## The ending she chose
 
 She closed on one line, and I'll end on it too: *let's think about enhancing, rather than replacing.*
-
-For a keynote that had just spent an hour arguing that real intelligence is embodied, social, and behaviorally hard, that's not a throwaway sentiment. It's the design brief. The question isn't whether these systems can do what a person does. The question is what they should do alongside the people they're supposed to help — the kids, the patients, the people who already know what they should be doing and can't quite get themselves to do it.
-
-I came in expecting a robotics talk. I left with a homework assignment for the rest of the week: every paper I read at ICLR, ask where the body is, where the other person is, and whether the work is trying to enhance someone or replace them.
-
-More notes as the conference goes on.

@@ -15,11 +15,14 @@ After my 23rd attempt at debugging an inference pipeline at 2 AM on a Sunday, I 
 
 I didn't come from a traditional CS background — I studied **economics and law**. But curiosity (and a lot of debugging in PyTorch) led me into machine learning.
 
-Over the last 4+ years, I've worked on:
+Over the last 5+ years, I've worked on:
 
 - Evaluation frameworks such as [Dynabench](https://dynabench.org).
 - Large-scale datasets such as [People's Speech](https://huggingface.co/datasets/MLCommons/peoples_speech) and [Adversarial Nibbler](https://github.com/google-research-datasets/adversarial-nibbler/tree/main).
-- Publishing at top conferences:
+- Coauthoring and publishing at top conferences:
+  - HelpMed, at Nature Medicine 2026.
+  - Constrained Wikigame, at the Reasoniing LLMs Workshop at ICLR 2026.
+  - Unsupervised Speech in The Wild Challenge, 
   - Best paper award at NeurIPS D&B 2024 with [The Prism Alignment Dataset](https://neurips.cc/virtual/2024/oral/98025).
   - [BabyLM](https://arxiv.org/abs/2504.08165) at CoNLL (ACL) 2023.
   - [DataPerf](https://proceedings.neurips.cc/paper_files/paper/2023/hash/112db88215e25b3ae2750e9eefcded94-Abstract-Datasets_and_Benchmarks.html) at NeurIPS 2023.
