@@ -4,53 +4,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-Jekyll 4.3 personal blog ("The Artificial Engineer") deployed to GitHub Pages at `theartificialengineer.ai` (see `CNAME`). It uses the [`awesome-jekyll-theme`](https://github.com/a-chacon/awesome-jekyll-theme) as a **remote theme** (see `_config.yml`), so most layouts/partials/assets are not in-tree — only local overrides live here.
+Astro 5 personal site + blog ("The Artificial Engineer") deployed to GitHub Pages at `theartificialengineer.ai` via a custom domain (see `public/CNAME`). Styled with Tailwind v4 through the `@tailwindcss/vite` plugin and the `@theme` CSS directive. Type-safe content via Astro content collections.
+
+The previous Jekyll-based site is preserved on the `legacy` branch — check it out if you need to see the old setup or reference historical content.
 
 ## Common commands
 
 ```bash
-bundle install                              # first-time setup / after Gemfile changes
-bundle exec jekyll serve                    # local dev server with live reload (http://127.0.0.1:4000)
-bundle exec jekyll serve --drafts           # include posts in _drafts/
-bundle exec jekyll build                    # one-off production build into _site/
-JEKYLL_ENV=production bundle exec jekyll build   # mirror CI build
+npm ci                  # first-time setup / after package-lock changes
+npm run dev             # local dev server with HMR (http://localhost:4321)
+npm run build           # production build into dist/
+npm run preview         # preview the built dist/ locally
 ```
 
-There is no lint or test suite. CI (`.github/workflows/pages.yml`) runs `bundle exec jekyll build` on push to `main` and publishes via the GitHub Pages deploy action; the workflow does **not** use the `github-pages` gem, it uses plain Jekyll with `bundler-cache`.
+No lint / test suite. CI (`.github/workflows/pages.yml`) runs `npm run build` on push to `main` and deploys `dist/` to GitHub Pages.
 
 ## Architecture
 
+### Content collections
+
+Three Zod-typed collections defined in `src/content.config.ts`:
+
+- **`posts`** (`src/content/posts/`) — blog posts. Required: `title`, `date`, `track`, `excerpt`. `track: "engineers" | "everyone"` is the routing field for this site's two-audience model. Optional: `category`, `tags`, `image` (relative path, optimized via `astro:assets`), `readingTime`, `author`, `draft`.
+- **`projects`** (`src/content/projects/`) — publications / datasets / competitions. Required: `title`, `kind`, `date`, `description`. `kind: "publication" | "dataset" | "competition"`.
+- **`journal`** (`src/content/journal/`) — private, dev-only notes. Gitignored (only `README.md` is tracked). See "Private journal" below.
+
 ### Two-track content model
 
-The blog has two audience tracks surfaced as separate nav pages, each filtering `site.posts` by category:
+Posts route into the "For Engineers" or "For Everyone" track via the `track:` front-matter enum. Filtering happens on the archive + index pages by reading `post.data.track`. The URL pattern is flat: `/posts/<slug>/` — the track is metadata, not part of the path.
 
-- `_pages/engineers.md` → `site.categories.engineers`
-- `_pages/everyone.md`  → `site.categories.everyone`
+### Routing
 
-**Posts route themselves into a track via the `categories:` front matter** (e.g. `categories: [everyone]`), *not* by folder. There is a single flat `_posts/` directory. A post with no matching category will appear in `/posts/` (which iterates `site.posts`) but not in either track page.
+File-based via Astro. Key routes:
 
-### Navigation
+- `src/pages/index.astro` — home
+- `src/pages/posts/index.astro` — archive + filter tabs
+- `src/pages/posts/[...slug].astro` — individual post (generated from the collection)
+- `src/pages/projects/*` — same pattern for projects
+- `src/pages/journal/*` — dev-only (see below)
+- `src/pages/rss.xml.ts` — RSS feed via `@astrojs/rss`
 
-The local `_includes/navbar.html` overrides the theme's navbar. It iterates `site.pages` and includes any page with `nav: true` in its front matter. To add a nav item, set `nav: true` on the page; to hide one, remove it. Order follows Jekyll's page iteration order.
+### Private journal (dev-only)
 
-### Collections
+`src/content/journal/` holds scratch notes for conferences / travel that never ship to production. Gating, in order of defense:
 
-`_config.yml` defines two collections beyond `_posts`:
+- Entries: `src/pages/journal/[...slug].astro` returns `[]` from `getStaticPaths` when `!import.meta.env.DEV`, so no HTML is built in prod and no referenced images are bundled.
+- Index: `src/pages/journal/index.astro` renders "Not available." in prod and ships `<meta name="robots" content="noindex,nofollow">`.
+- Nav link: the "Journal" entry in `src/components/Header.astro` is conditional on `import.meta.env.DEV`.
+- Sitemap: `astro.config.mjs` filters `/journal*` via the sitemap integration's `filter` option.
+- Git: `.gitignore` excludes `src/content/journal/**` except `README.md`.
 
-- `pages` (from `_pages/`) — permalinks set by each page's own `permalink:` front matter
-- `projects` (from `_projects/`) — permalink pattern `/projects/:title/`, rendered via the theme's `project` / `projects` layouts
+Workflow: jot notes into a per-event markdown file during the conference, drop photos into a sibling folder, then use the `blog-post-crafter` agent to remix the notes into a publishable post under `src/content/posts/`.
 
-### Local overrides vs. remote theme
+### Subagents
 
-When editing layout/styling, check whether the file exists locally first — local files shadow theme files of the same name:
+- `.claude/agents/blog-post-crafter.md` — opus-grade editorial agent that turns journal notes + photos into Astro-format blog posts. Its persistent project-scope memory lives in `.claude/agent-memory/blog-post-crafter/`.
 
-- `_layouts/default.html` — minimal custom default that pulls in theme CSS (`dist-style.css` + `main.css`), runs `{% seo %}`, and includes `navbar.html` + `footer.html`
-- `_includes/navbar.html`, `_includes/custom_head.html`, `_includes/contact_channels.html`
-- Layouts like `home`, `blog`, `post`, `project`, `projects` referenced in front matter come from the **remote theme** and are not in this repo — to customize them, copy the file from the theme into `_layouts/` and edit locally.
+### Styling
 
-### Config worth knowing
+- Tailwind v4 via `@tailwindcss/vite`; design tokens defined in `src/styles/global.css` with the `@theme` directive.
+- Fonts: Inter (sans) + Kumbh Sans (display) via `@fontsource-variable/*`.
+- Prose styles via `@tailwindcss/typography`.
 
-- `permalink: /:categories/:title/` — post URLs embed their category (e.g. `/everyone/why-this-blog/`), unless a post overrides with its own `permalink:` front matter (as the sample post does)
-- `paginate: 5` with `paginate_path: "/page:num/"`
-- Plugins include `jekyll-polyglot` (multi-language support, currently only `default_lang: en`) and `jekyll-archives` (category/tag archives at `/categories/` and `/tags/`)
-- `rrss:` block feeds the theme's social links; `contact_channels:` is used by the local include
+### Deploy
+
+- GitHub Actions workflow: `.github/workflows/pages.yml`. Node 20, `npm ci`, `npm run build`, upload `dist/` as a Pages artifact, deploy via `actions/deploy-pages`.
+- Custom domain: `public/CNAME` contains `theartificialengineer.ai`. Astro copies it into `dist/` verbatim at build time.
+- DNS lives at Namecheap, pointed at GitHub Pages (A records + `www` CNAME). No Vercel.
