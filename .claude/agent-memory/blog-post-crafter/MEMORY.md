@@ -6,3 +6,5 @@
 - [Journal-to-post workflow](project_conference_journals.md) — journal files under src/content/journal/ are raw notes and templates, only populated sections are real.
 - [Style reference post](reference_style_anchor.md) — why-this-blog.md is the canonical voice anchor for tone and structure.
 - [Rafael's voice rules (HARD)](feedback_voice_style.md) — no em dashes, no "not X, it's Y" patterns, default to terseness. Evidence from ICLR post diff.
+- [Conference-post structure](feedback_conference_post_structure.md) — "Notes from..." title, declarative H2s, end on speaker's quote, italicized verbatim quotes.
+- [Voice rules scope](feedback_frontmatter_scope.md) — hard voice rules apply to body prose and captions; excerpts/frontmatter are lower priority.

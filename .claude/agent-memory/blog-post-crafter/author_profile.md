@@ -18,7 +18,7 @@ Voice (especially in "everyone" track):
 - Short paragraphs. Varied sentence length. Willing to use one-sentence paragraphs for emphasis.
 - H2/H3 structure. Bullet lists where they pay their rent (enumerating claims, not padding).
 - Ends on a forward-looking line or a question — not a summary.
-- Comfortable with light italics for emphasis, and asides in em-dashes.
+- Comfortable with light italics for emphasis. **Do not use em dashes** in prose — see `feedback_voice_style.md` for the hard rule.
 
 "Engineers" track (when it comes up): same voice, but welcomes code blocks, precise terminology, benchmarks, and reproducibility notes. Technical depth is the point there.
 
