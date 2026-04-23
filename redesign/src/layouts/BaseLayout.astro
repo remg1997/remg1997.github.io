@@ -13,6 +13,7 @@ interface Props {
   image?: string;
   canonical?: string;
   hideCTA?: boolean;
+  noindex?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   image = "/og-default.png",
   canonical,
   hideCTA = false,
+  noindex = false,
 } = Astro.props;
 
 const siteName = "The Artificial Engineer";
@@ -40,6 +42,7 @@ const ogImage = new URL(image, Astro.site).toString();
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
 
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={fullTitle} />

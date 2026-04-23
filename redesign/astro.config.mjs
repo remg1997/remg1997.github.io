@@ -5,7 +5,10 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://theartificialengineer.ai",
-  integrations: [mdx(), sitemap()],
+  integrations: [
+    mdx(),
+    sitemap({ filter: (page) => !page.includes("/journal") }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

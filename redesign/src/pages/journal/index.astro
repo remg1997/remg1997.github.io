@@ -1,0 +1,118 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import Icon from "../../components/Icon.astro";
+
+const isDev = import.meta.env.DEV;
+
+const entries = isDev
+  ? (await getCollection("journal")).sort(
+      (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+    )
+  : [];
+
+const entriesByEvent = new Map<string, typeof entries>();
+for (const entry of entries) {
+  const key = entry.data.event;
+  if (!entriesByEvent.has(key)) entriesByEvent.set(key, []);
+  entriesByEvent.get(key)!.push(entry);
+}
+
+const statusLabel: Record<string, string> = {
+  active: "Active",
+  archived: "Archived",
+  remixed: "Remixed into post",
+};
+---
+
+<BaseLayout
+  title="Journal"
+  description="Private conference + travel notes. Dev-only."
+  hideCTA
+  noindex
+>
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-6 py-16 lg:py-20">
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="rounded-[var(--radius-pill)] border border-accent/40 bg-accent/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.08em] text-accent">
+          Dev-only
+        </span>
+        <span class="text-sm text-muted">Never shipped to production.</span>
+      </div>
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.05] tracking-[-0.02em] text-ink md:text-6xl">
+        Journal
+      </h1>
+      <p class="max-w-2xl text-lg text-body md:text-xl">
+        Scratch notes from conferences and trips. Raw fuel for the blogposts I'll remix later.
+      </p>
+    </Container>
+  </section>
+
+  {
+    isDev ? (
+      <section>
+        <Container as="div" class="flex flex-col gap-16 py-16 lg:py-20">
+          {entries.length === 0 ? (
+            <p class="text-base text-body">
+              No entries yet. Drop a markdown file in{" "}
+              <code class="rounded bg-surface px-2 py-1 text-sm text-ink">
+                src/content/journal/
+              </code>
+              .
+            </p>
+          ) : (
+            [...entriesByEvent.entries()].map(([event, items]) => (
+              <div class="space-y-6">
+                <div class="flex items-baseline justify-between gap-4 border-b border-border pb-4">
+                  <h2 class="font-display text-2xl font-medium text-ink md:text-3xl">
+                    {event}
+                  </h2>
+                  <span class="text-sm text-muted">
+                    {items.length} {items.length === 1 ? "entry" : "entries"}
+                  </span>
+                </div>
+                <ul class="divide-y divide-border">
+                  {items.map((entry) => (
+                    <li>
+                      <a
+                        href={`/journal/${entry.id}/`}
+                        class="flex flex-col gap-2 py-5 transition-colors hover:bg-surface md:flex-row md:items-center md:justify-between md:gap-6"
+                      >
+                        <div class="flex min-w-0 flex-col gap-1">
+                          <span class="font-display text-lg font-medium text-ink">
+                            {entry.data.title}
+                          </span>
+                          <span class="flex flex-wrap items-center gap-3 text-xs text-muted">
+                            <time datetime={entry.data.date.toISOString()}>
+                              {entry.data.date.toLocaleDateString("en-US", {
+                                year: "numeric",
+                                month: "short",
+                                day: "numeric",
+                              })}
+                            </time>
+                            {entry.data.location && <span>· {entry.data.location}</span>}
+                            <span class="rounded-[var(--radius-pill)] border border-border bg-surface px-2 py-0.5 text-[10px] uppercase tracking-[0.08em]">
+                              {statusLabel[entry.data.status] ?? entry.data.status}
+                            </span>
+                          </span>
+                        </div>
+                        <Icon name="arrow-up-right" size={16} />
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          )}
+        </Container>
+      </section>
+    ) : (
+      <section>
+        <Container as="div" class="py-20">
+          <p class="text-base text-muted">Not available.</p>
+        </Container>
+      </section>
+    )
+  }
+</BaseLayout>

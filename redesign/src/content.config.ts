@@ -34,4 +34,19 @@ const projects = defineCollection({
     }),
 });
 
-export const collections = { posts, projects };
+const journal = defineCollection({
+  loader: glob({
+    pattern: ["**/*.{md,mdx}", "!README.md"],
+    base: "./src/content/journal",
+  }),
+  schema: z.object({
+    title: z.string(),
+    event: z.string(),
+    date: z.coerce.date(),
+    location: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    status: z.enum(["active", "archived", "remixed"]).default("active"),
+  }),
+});
+
+export const collections = { posts, projects, journal };
