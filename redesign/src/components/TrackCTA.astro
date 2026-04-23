@@ -1,0 +1,63 @@
+---
+import Container from "./Container.astro";
+import Icon from "./Icon.astro";
+
+const cards = [
+  {
+    href: "/posts?track=engineers",
+    eyebrow: "For Engineers",
+    title: "Technical deep dives",
+    body: "Reproducible experiments, benchmarks, architecture breakdowns, and production lessons learned the hard way.",
+  },
+  {
+    href: "/posts?track=everyone",
+    eyebrow: "For Everyone",
+    title: "Accessible explainers",
+    body: "Plain-English explanations of how AI actually works and affects daily life. No PhD required.",
+  },
+  {
+    href: "/projects",
+    eyebrow: "Projects",
+    title: "Research & datasets",
+    body: "Publications, benchmarks, and datasets I've contributed to — from NeurIPS papers to open data releases.",
+  },
+];
+---
+
+<section id="newsletter" class="border-y border-border bg-surface">
+  <Container as="div" class="flex flex-col gap-16 py-24 lg:py-32">
+    <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between md:gap-16">
+      <div class="space-y-5 md:max-w-2xl">
+        <span class="inline-block rounded-sm bg-surface-3 px-2.5 py-1 text-sm font-medium text-ink">
+          Learn, build, share
+        </span>
+        <h2 class="font-display text-4xl font-medium leading-tight tracking-[-0.02em] text-ink md:text-5xl lg:text-[58px] lg:leading-[1.1]">
+          Writing at the seam between research and production.
+        </h2>
+      </div>
+      <p class="max-w-md text-base text-muted md:text-lg">
+        Immerse yourself in the in-between space where papers become systems. Two parallel tracks for two kinds of readers — pick the one that speaks to you.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-5 md:grid-cols-3">
+      {
+        cards.map((card) => (
+          <a
+            href={card.href}
+            class="group flex flex-col gap-5 rounded-[var(--radius-md)] border border-border bg-bg p-10 transition-colors hover:border-border-subtle"
+          >
+            <div class="flex items-center justify-between gap-4">
+              <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">{card.eyebrow}</p>
+              <span class="grid size-12 place-items-center rounded-full bg-accent text-accent-ink transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                <Icon name="arrow-up-right" size={20} strokeWidth={2.25} />
+              </span>
+            </div>
+            <p class="font-display text-2xl font-semibold tracking-tight text-ink">{card.title}</p>
+            <p class="text-base text-body">{card.body}</p>
+          </a>
+        ))
+      }
+    </div>
+  </Container>
+</section>

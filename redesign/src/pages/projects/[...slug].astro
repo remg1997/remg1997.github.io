@@ -1,0 +1,88 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import Icon from "../../components/Icon.astro";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, description, kind, venue, date, link, image, tags } = project.data;
+
+const kindLabel =
+  kind === "publication" ? "Publication" : kind === "dataset" ? "Dataset" : "Competition";
+const formattedDate = date.toLocaleDateString("en-US", { year: "numeric", month: "long" });
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-10 py-16 lg:py-20">
+      <a href="/projects" class="inline-flex items-center gap-2 self-start text-sm text-muted transition-colors hover:text-ink">
+        <Icon name="chevron-right" size={14} class="rotate-180" />
+        All projects
+      </a>
+      <div class="flex flex-wrap items-center gap-2 text-xs text-muted">
+        <span class="rounded-[var(--radius-pill)] border border-border bg-surface px-3 py-1 uppercase tracking-[0.08em]">{kindLabel}</span>
+        <span>· {formattedDate}</span>
+        {venue && <span>· {venue}</span>}
+      </div>
+      <h1 class="max-w-4xl font-display text-4xl font-semibold leading-[1.1] tracking-[-0.02em] text-ink md:text-5xl lg:text-[56px]">
+        {title}
+      </h1>
+      <p class="max-w-2xl text-lg text-body">{description}</p>
+      {
+        link && (
+          <a
+            href={link}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 self-start rounded-[var(--radius)] bg-accent px-5 py-3 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
+          >
+            Visit source
+            <Icon name="arrow-up-right" size={16} strokeWidth={2.25} />
+          </a>
+        )
+      }
+    </Container>
+  </section>
+
+  {
+    image && (
+      <section class="border-b border-border">
+        <Container as="div" class="py-12">
+          <div class="overflow-hidden rounded-[var(--radius-md)] border border-border">
+            <Image src={image} alt={title} widths={[640, 960, 1280]} sizes="(min-width: 1024px) 960px, 100vw" class="w-full" />
+          </div>
+        </Container>
+      </section>
+    )
+  }
+
+  <section>
+    <Container as="div" class="py-16">
+      <article class="prose prose-invert mx-auto max-w-3xl">
+        <Content />
+      </article>
+      {
+        tags.length > 0 && (
+          <div class="mx-auto mt-10 flex max-w-3xl flex-wrap items-center gap-2 border-t border-border pt-8">
+            <span class="text-sm text-muted">Tagged</span>
+            {tags.map((tag) => (
+              <span class="rounded-[var(--radius-pill)] border border-border bg-surface px-3 py-1 text-xs text-body">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        )
+      }
+    </Container>
+  </section>
+</BaseLayout>

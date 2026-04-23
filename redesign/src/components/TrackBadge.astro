@@ -1,0 +1,19 @@
+---
+interface Props {
+  track: "engineers" | "everyone";
+  class?: string;
+}
+
+const { track, class: className = "" } = Astro.props;
+
+const label = track === "engineers" ? "For Engineers" : "For Everyone";
+---
+
+<span
+  class={`inline-flex items-center gap-1.5 rounded-[var(--radius-pill)] border border-border bg-surface px-3 py-1 text-xs font-medium uppercase tracking-[0.08em] text-body ${className}`}
+>
+  <span
+    class={`size-1.5 rounded-full ${track === "engineers" ? "bg-accent" : "bg-body-strong"}`}
+  ></span>
+  {label}
+</span>

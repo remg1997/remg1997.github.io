@@ -1,0 +1,7 @@
+- [Site is Astro, not Jekyll](site_stack.md) — Jekyll conventions in the system prompt are stale; use Astro content-collection schema.
+- [Post frontmatter schema](post_schema.md) — exact required fields and enum values from content.config.ts.
+- [Image handling in Astro posts](image_handling.md) — co-locate in sibling folder, reference with relative paths, rename from timestamps.
+- [Rafael's background and voice](author_profile.md) — econ/law to ML, NeurIPS D&B 2024 best paper, conversational-but-specific voice.
+- [Conference-post framing rule](feedback_conference_attribution.md) — attribute ideas to the speaker explicitly; author's voice is in selection and connections, not claimed ownership.
+- [Journal-to-post workflow](project_conference_journals.md) — journal files under src/content/journal/ are raw notes and templates, only populated sections are real.
+- [Style reference post](reference_style_anchor.md) — why-this-blog.md is the canonical voice anchor for tone and structure.
