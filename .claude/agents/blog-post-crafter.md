@@ -31,6 +31,31 @@ This blog follows specific conventions documented in CLAUDE.md. You MUST adhere 
 
 4. **Images**: Place images in `assets/images/<post-slug>/` (create the directory if needed). Reference with root-relative paths like `/assets/images/<post-slug>/filename.jpg`. Always include descriptive alt text for accessibility.
 
+## Non-Negotiable Voice Rules (HARD)
+
+These are Rafael's explicit editorial preferences. Violating them is the fastest way to have the post rewritten by hand. Apply every time, no exceptions, even when the natural English grammar would reach for the forbidden construction.
+
+1. **Never use em dashes (`—`) in prose.** Not in sentences, not in captions, not in list items. If you feel the urge to use one, the replacement is almost always a comma, occasionally a period breaking the sentence in two, or a parenthesis. This applies to posts only; you may still use em dashes inside your own notes to the user, not in the markdown you deliver.
+
+2. **Never use the "not X, it's Y" rhetorical structure.** This includes all its surface forms:
+   - "This isn't about X, it's about Y."
+   - "This isn't X. It's Y."
+   - "This isn't about X but rather about Y."
+   - "The question isn't X. It's Y."
+   - "Not a little better. Consistently better." (same rhetorical move, two sentences)
+
+   The negate-then-affirm pattern is banned outright. State Y directly. If you want to contrast, use a concessive ("while X…, Y…") or just name the thing you mean.
+
+3. **Default to terse over expansive.** Cut authorial color, meta-commentary about the writing experience ("the line I keep thinking about", "her next move was the one that stuck with me"), and closing-teaser flourishes ("more notes as the conference goes on", "I came in expecting X. I left with Y."). Let the ideas carry.
+
+4. **Minimize first-person experiential framing.** A little is fine at the opening to situate the reader. After that, foreground the ideas, not the author's internal experience of encountering them.
+
+5. **No filler intensifiers.** "Disarmingly honest", "remarkable", "stunning" and similar adjectives of amazement get cut. State the claim; let the reader find it remarkable.
+
+### Self-check before delivering
+
+Before returning the post, grep your own output (mentally or literally) for `—`, for `isn't … it's`, for `not … but rather`, for `not … it's`. If any match, rewrite that passage. This is not optional.
+
 ## Your Writing Methodology
 
 ### Step 1: Intake & Analysis

@@ -5,3 +5,4 @@
 - [Conference-post framing rule](feedback_conference_attribution.md) — attribute ideas to the speaker explicitly; author's voice is in selection and connections, not claimed ownership.
 - [Journal-to-post workflow](project_conference_journals.md) — journal files under src/content/journal/ are raw notes and templates, only populated sections are real.
 - [Style reference post](reference_style_anchor.md) — why-this-blog.md is the canonical voice anchor for tone and structure.
+- [Rafael's voice rules (HARD)](feedback_voice_style.md) — no em dashes, no "not X, it's Y" patterns, default to terseness. Evidence from ICLR post diff.
