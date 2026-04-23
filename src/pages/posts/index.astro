@@ -28,16 +28,16 @@ const tabs = [
 
 <BaseLayout
   title="All Posts"
-  description="Everything I've written — engineering deep dives and accessible explainers in one place."
+  description="Everything published, across both tracks: engineering deep dives and accessible explainers in one place."
 >
   <section class="border-b border-border">
     <Container as="div" class="flex flex-col gap-8 py-20 lg:py-28">
       <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">The blog</p>
       <h1 class="max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-[-0.02em] text-ink md:text-6xl">
-        Everything I've written, across both tracks.
+        Everything published, across both tracks.
       </h1>
       <p class="max-w-2xl text-lg text-body">
-        Two parallel tracks for two kinds of readers — deep dives for engineers, accessible explainers for everyone. Pick the one that matches where you are today.
+        Two parallel tracks for two kinds of readers: deep dives for engineers, accessible explainers for everyone. Pick the one that matches where you are today.
       </p>
     </Container>
   </section>
@@ -46,7 +46,7 @@ const tabs = [
     allPosts.length === 0 ? (
       <section>
         <Container as="div" class="py-24 text-center">
-          <p class="text-lg text-muted">No posts yet — come back soon.</p>
+          <p class="text-lg text-muted">No posts yet. Come back soon.</p>
         </Container>
       </section>
     ) : (

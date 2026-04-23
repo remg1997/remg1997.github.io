@@ -4,7 +4,7 @@ date: 2025-09-02
 track: everyone
 excerpt: "A two-track ML blog: reproducible engineering deep dives for practitioners, and clear explainers for everyone."
 tags: [ml-engineering, reproducibility, learning-in-public]
-author: "Rafael Mosquera"
+author: "rafael"
 ---
 
 ## The Problem

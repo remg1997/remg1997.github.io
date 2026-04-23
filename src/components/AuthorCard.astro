@@ -1,0 +1,93 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+
+interface Props {
+  author: CollectionEntry<"authors">;
+}
+
+const { author } = Astro.props;
+const { name, role, tagline, avatar, links } = author.data;
+
+const iconLinks = [
+  { key: "website", icon: "arrow-up-right" as const, label: "Website" },
+  { key: "github", icon: "github" as const, label: "GitHub" },
+  { key: "linkedin", icon: "linkedin" as const, label: "LinkedIn" },
+  { key: "scholar", icon: "scholar" as const, label: "Google Scholar" },
+  { key: "twitter", icon: "twitter" as const, label: "Twitter" },
+  { key: "email", icon: "mail" as const, label: "Email", transform: (v: string) => `mailto:${v}` },
+] as const;
+
+const linkList = iconLinks
+  .map((l) => {
+    const value = links[l.key as keyof typeof links];
+    if (!value) return null;
+    const href = "transform" in l && l.transform ? l.transform(value) : value;
+    return { href, icon: l.icon, label: l.label, external: href.startsWith("http") };
+  })
+  .filter((l): l is NonNullable<typeof l> => l !== null);
+
+const initials = name
+  .split(/\s+/)
+  .map((w) => w[0])
+  .slice(0, 2)
+  .join("")
+  .toUpperCase();
+---
+
+<article class="flex flex-col gap-6 rounded-[var(--radius-md)] border border-border bg-surface p-8 transition-colors hover:border-border-subtle">
+  <div class="flex items-start gap-5">
+    {
+      avatar ? (
+        <Image
+          src={avatar}
+          alt={name}
+          width={96}
+          height={96}
+          class="size-20 shrink-0 rounded-full object-cover"
+        />
+      ) : (
+        <span
+          class="grid size-20 shrink-0 place-items-center rounded-full bg-accent/15 font-display text-2xl font-semibold text-accent"
+          aria-hidden="true"
+        >
+          {initials}
+        </span>
+      )
+    }
+    <div class="min-w-0 flex-1 space-y-1">
+      <a href={`/authors/${author.id}/`} class="block font-display text-xl font-semibold text-ink transition-colors hover:text-accent">
+        {name}
+      </a>
+      <p class="text-sm uppercase tracking-[0.08em] text-muted">{role}</p>
+    </div>
+  </div>
+
+  {tagline && <p class="text-base text-body">{tagline}</p>}
+
+  {
+    linkList.length > 0 && (
+      <div class="flex flex-wrap items-center gap-2 border-t border-border pt-5 text-muted">
+        {linkList.map((l) => (
+          <a
+            href={l.href}
+            aria-label={l.label}
+            target={l.external ? "_blank" : undefined}
+            rel={l.external ? "noopener" : undefined}
+            class="grid size-9 place-items-center rounded-[var(--radius)] border border-border bg-bg transition-colors hover:border-border-subtle hover:text-ink"
+          >
+            <Icon name={l.icon} size={16} />
+          </a>
+        ))}
+        <a
+          href={`/authors/${author.id}/`}
+          class="ml-auto inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink"
+        >
+          Full profile
+          <Icon name="chevron-right" size={14} />
+        </a>
+      </div>
+    )
+  }
+</article>

@@ -1,10 +1,10 @@
 ---
-title: "Notes from ICLR 2026: Maja Mataric on What AI Still Needs from Bodies"
+title: "Notes from ICLR 2026: Maja Mataric on Why AI Needs a Body"
 date: 2026-04-23
 track: everyone
 excerpt: "Opening keynote at ICLR 2026 from USC and Google DeepMind's Maja Mataric — a case that intelligence without a body misses the point, and that the robots we actually need aren't the ones trying hardest to look human."
 tags: [iclr, conference, human-centered-ai, robotics, embodiment]
-author: "Rafael Mosquera"
+author: "rafael"
 image: ./iclr-2026-mataric-human-centered-ai/hall-before-keynote.jpg
 ---
 
@@ -15,7 +15,7 @@ I got to the room early on purpose. The opening keynote at ICLR 2026 was Maja Ma
 
 What follows is my set of notes on her keynote, plus some thoughts.
 
-## The question she opened with
+## The Question
 
 Mataric opened with something that sounds almost too simple to ask at a venue like ICLR: *why do we work on AI?*
 
@@ -26,7 +26,7 @@ That framing shaped everything that came after.
 ![Title slide: The Challenges of Human-Centered AI and Robotics, Maja J. Mataric, USC Viterbi and Google DeepMind.](./iclr-2026-mataric-human-centered-ai/title-slide.jpg)
 *Title slide. USC Viterbi and Google DeepMind.*
 
-## Intelligence evolved inside a body. Ours didn't come from text.
+## Intelligence Evolved Inside a Body. Ours Didn't Come From Text.
 
 Human intelligence, she reminded us, evolved inside a **body** and an **environment**. Language and complex reasoning weren't bootstrapped from a giant pile of tokens, they emerged from social interaction, from needing to coordinate with other embodied agents who had their own goals and their own bodies. Our cognition is, top to bottom, shaped by the fact that we have hands and faces and skin and other people.
 

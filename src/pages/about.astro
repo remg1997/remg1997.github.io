@@ -1,36 +1,42 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Container from "../components/Container.astro";
+import AuthorCard from "../components/AuthorCard.astro";
 import Icon from "../components/Icon.astro";
 
 const pillars = [
   {
-    label: "Background",
-    body: "Economics and law by degree; ML engineer by practice. Four years of industry experience building datasets, evaluation systems, and production inference.",
+    label: "Reproducible",
+    body: "Experiments you can rerun, benchmarks with the full setup, and evaluation protocols stated in plain terms.",
   },
   {
-    label: "Recognition",
-    body: "NeurIPS D&B 2024 best paper (Prism Alignment Dataset). Contributions to Dynabench, People's Speech, Adversarial Nibbler, DataPerf, BabyLM.",
+    label: "Honest",
+    body: "What works in production, what fails, and where the research paper stops matching the deployed system.",
   },
   {
-    label: "Focus",
-    body: "Reproducible evaluation, honest assessments of what works in production, and the gap between research papers and shipped systems.",
+    label: "Dual-track",
+    body: "Technical depth for engineers who ship, accessible explainers for everyone else who wants to understand.",
   },
 ];
+
+const authors = (await getCollection("authors")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout
   title="About"
-  description="About Rafael Mosquera — self-made ML engineer, economics and law background, NeurIPS best paper, writing at the seam of research and production."
+  description="The Artificial Engineer is a two-track ML publication: deep technical dives for engineers, clear explainers for everyone, written at the seam between research and production."
 >
   <section class="border-b border-border">
     <Container as="div" class="flex flex-col gap-10 py-20 lg:py-28">
       <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">About</p>
       <h1 class="max-w-4xl font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink md:text-6xl lg:text-[72px]">
-        I make artificial-intelligence systems work in the real world.
+        A two-track ML publication at the seam between research and production.
       </h1>
       <p class="max-w-3xl text-lg text-body md:text-xl">
-        I'm Rafael Mosquera. I came to ML the long way round — through economics and law, then four years of industry debugging, dataset building, and production inference. This site is where I work out loud: what I'm learning, what's not in the tutorials, and what the gap between a published paper and a shipped system really feels like.
+        The Artificial Engineer is a publication about building machine-learning systems that actually work in the real world. Two parallel tracks: deep technical dives for engineers who ship, and clear explainers for everyone who wants to understand what modern AI is really doing.
       </p>
     </Container>
   </section>
@@ -58,16 +64,16 @@ const pillars = [
       </div>
       <div class="space-y-8 text-base text-body md:text-lg">
         <p>
-          After one too many 2 AM debugging sessions, I noticed a consistent pattern: the gap between research papers and production reality is bigger than anyone admits. Technical writing often assumes you've been in the bubble. Popular ML writing flattens nuance until it's misleading. There are very few bridges between the two.
+          The gap between a published paper and a shipped system is bigger than anyone admits. Technical writing often assumes you have been inside the research bubble for years. Popular ML writing flattens nuance until it stops being true. There are very few bridges between the two.
         </p>
         <p>
-          That's the shape this blog takes. Two parallel tracks, each closing the gap from a different side:
+          This publication tries to be one of those bridges. Two parallel tracks, each closing the gap from a different side:
         </p>
         <div class="grid grid-cols-1 gap-5 pt-2 md:grid-cols-2">
           <div class="space-y-3 rounded-[var(--radius-md)] border border-border bg-surface p-6">
             <p class="font-display text-xl font-semibold text-ink">For Engineers</p>
             <p class="text-base text-body">
-              Reproducible experiments, benchmarks, architecture breakdowns, and the production lessons I learned the hard way.
+              Reproducible experiments, benchmarks, architecture breakdowns, and production lessons learned the hard way.
             </p>
           </div>
           <div class="space-y-3 rounded-[var(--radius-md)] border border-border bg-surface p-6">
@@ -77,9 +83,33 @@ const pillars = [
             </p>
           </div>
         </div>
-        <p>
-          I'm not a "real" engineer by degree, but I've spent four years making AI systems work in the real world. The name captures the irony: someone artificial (by training) engineering artificial intelligence.
-        </p>
+      </div>
+    </Container>
+  </section>
+
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-12 py-20 lg:py-24">
+      <div class="flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl space-y-4">
+          <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">Contributors</p>
+          <h2 class="font-display text-3xl font-medium leading-tight tracking-tight text-ink md:text-5xl">
+            The people writing this.
+          </h2>
+          <p class="text-base text-body md:text-lg">
+            Founded and edited by Rafael Mosquera, with guest contributions from researchers and engineers working at the seam between ML research and production.
+          </p>
+        </div>
+        <a
+          href="/contact"
+          class="inline-flex items-center gap-2 rounded-[var(--radius)] border border-border bg-surface px-5 py-3 text-sm text-body transition-colors hover:border-border-subtle hover:text-ink"
+        >
+          Pitch a post
+          <Icon name="arrow-up-right" size={16} />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {authors.map((author) => <AuthorCard author={author} />)}
       </div>
     </Container>
   </section>
@@ -87,25 +117,18 @@ const pillars = [
   <section class="border-b border-border">
     <Container as="div" class="flex flex-col items-start gap-8 py-16">
       <h2 class="max-w-3xl font-display text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
-        Say hello.
+        Get in touch.
       </h2>
       <p class="max-w-2xl text-base text-body md:text-lg">
-        If you have a specific engineering challenge, a post idea, or just want to argue about evaluation methodology — I'd love to hear from you.
+        Specific engineering challenge, post idea, guest pitch, or an argument about evaluation methodology, all welcome.
       </p>
       <div class="flex flex-wrap items-center gap-3">
         <a
           href="/contact"
           class="inline-flex items-center gap-2 rounded-[var(--radius)] bg-accent px-6 py-3.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90"
         >
-          Get in touch
+          Contact
           <Icon name="arrow-up-right" size={16} strokeWidth={2.25} />
-        </a>
-        <a
-          href="mailto:rafael@theartificialengineer.ai"
-          class="inline-flex items-center gap-2 rounded-[var(--radius)] border border-border bg-surface px-6 py-3.5 text-sm text-body transition-colors hover:border-border-subtle hover:text-ink"
-        >
-          rafael@theartificialengineer.ai
-          <Icon name="mail" size={16} />
         </a>
       </div>
     </Container>

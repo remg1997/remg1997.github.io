@@ -13,7 +13,7 @@ const posts = defineCollection({
       tags: z.array(z.string()).default([]),
       image: image().optional(),
       readingTime: z.string().optional(),
-      author: z.string().default("Rafael Mosquera"),
+      author: z.string().default("rafael"),
       draft: z.boolean().default(false),
     }),
 });
@@ -49,4 +49,30 @@ const journal = defineCollection({
   }),
 });
 
-export const collections = { posts, projects, journal };
+const authors = defineCollection({
+  loader: glob({
+    pattern: ["**/*.{md,mdx}", "!README.md"],
+    base: "./src/content/authors",
+  }),
+  schema: ({ image }) =>
+    z.object({
+      name: z.string(),
+      role: z.string(),
+      tagline: z.string().optional(),
+      avatar: image().optional(),
+      links: z
+        .object({
+          website: z.string().url().optional(),
+          github: z.string().url().optional(),
+          linkedin: z.string().url().optional(),
+          scholar: z.string().url().optional(),
+          twitter: z.string().url().optional(),
+          email: z.string().email().optional(),
+        })
+        .default({}),
+      order: z.number().default(999),
+      featured: z.boolean().default(false),
+    }),
+});
+
+export const collections = { posts, projects, journal, authors };

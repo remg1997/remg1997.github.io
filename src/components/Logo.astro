@@ -1,0 +1,32 @@
+---
+import { Image } from "astro:assets";
+import logoSrc from "../assets/logo.png";
+
+interface Props {
+  height?: number;
+  class?: string;
+  alt?: string;
+}
+
+const {
+  height = 40,
+  class: className = "",
+  alt = "The Artificial Engineer",
+} = Astro.props;
+
+const aspectRatio = logoSrc.width / logoSrc.height;
+const renderedWidth = Math.round(height * aspectRatio);
+---
+
+<Image
+  src={logoSrc}
+  alt={alt}
+  width={renderedWidth * 2}
+  height={height * 2}
+  densities={[1, 2]}
+  class:list={[
+    "shrink-0 object-contain [filter:invert(1)] mix-blend-screen",
+    className,
+  ]}
+  style={`height: ${height}px; width: ${renderedWidth}px;`}
+/>
