@@ -1,0 +1,6 @@
+- [Journal folder structure](journal_layout.md) — how Rafael organizes event photos under `src/content/journal/<event>/<talk>/`.
+- [User photo quality patterns at ICLR 2026](iclr-2026-photo-quality.md) — what to expect from the per-talk oral-session photos in this event.
+- [PDF extraction via Read tool](pdf-extraction-via-read.md) — shell pdftoppm/pdfimages are sandboxed-denied; use Read with `pages:` instead.
+- [Post image path convention](post-image-paths.md) — where post-scoped images live and the convention for naming them.
+- [Papers directory layout](papers-dir-layout.md) — the enriched-summary + PDF + figures layout that the previous agent produces.
+- [Blog caption voice](caption-voice.md) — tone cues Rafael uses in the engineer track.

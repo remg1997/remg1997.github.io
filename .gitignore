@@ -11,3 +11,14 @@ npm-debug.log*
 # The README at this path is the one exception.
 src/content/journal/**
 !src/content/journal/README.md
+
+# Paper PDFs are reference material for writing; keep out of the repo for size
+# and licensing sanity. The .md summaries stay tracked.
+papers/*.pdf
+
+# Intermediate page-level renders from pdftoppm; regeneratable from the PDFs.
+# Only the cropped figures that land in post folders get tracked.
+papers/figures/
+
+# Local virtualenvs for helper scripts (pillow-based cropping, etc.).
+.venv*/

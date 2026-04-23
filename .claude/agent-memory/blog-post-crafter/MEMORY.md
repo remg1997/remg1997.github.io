@@ -8,3 +8,4 @@
 - [Rafael's voice rules (HARD)](feedback_voice_style.md) — no em dashes, no "not X, it's Y" patterns, default to terseness. Evidence from ICLR post diff.
 - [Conference-post structure](feedback_conference_post_structure.md) — "Notes from..." title, declarative H2s, end on speaker's quote, italicized verbatim quotes.
 - [Voice rules scope](feedback_frontmatter_scope.md) — hard voice rules apply to body prose and captions; excerpts/frontmatter are lower priority.
+- [Link papers on engineers-track posts](feedback_technical_post_paper_links.md) — every paper named gets a "read the full paper here" link; pull the URL from papers/<slug>.md.
