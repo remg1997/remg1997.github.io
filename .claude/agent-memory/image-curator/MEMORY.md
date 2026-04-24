@@ -4,3 +4,5 @@
 - [Post image path convention](post-image-paths.md) — where post-scoped images live and the convention for naming them.
 - [Papers directory layout](papers-dir-layout.md) — the enriched-summary + PDF + figures layout that the previous agent produces.
 - [Blog caption voice](caption-voice.md) — tone cues Rafael uses in the engineer track.
+- [Conference-post section structure](conference-post-structure.md) — paper-per-section convention, when to add agenda cards or closings, which figure types work per section role.
+- [Prefer user photos](feedback_prefer_user_photos.md) — Rafael wants his event photos included when reasonable; rotation and flare are fixable, emit corrections in extraction log.
