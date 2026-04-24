@@ -1,0 +1,151 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getCollection } from "astro:content";
+
+const KIND_META = {
+  publications: {
+    singular: "publication",
+    label: "Publications",
+    h1: "Publications.",
+    description: "Peer-reviewed papers, workshop submissions, and technical reports.",
+    descriptionLong:
+      "Peer-reviewed papers, workshop submissions, and technical reports the people writing here have published.",
+  },
+  datasets: {
+    singular: "dataset",
+    label: "Datasets",
+    h1: "Datasets.",
+    description: "Open data releases, benchmarks, and evaluation sets.",
+    descriptionLong:
+      "Open data releases, benchmarks, and evaluation sets contributors have shipped or co-authored.",
+  },
+  competitions: {
+    singular: "competition",
+    label: "Competitions",
+    h1: "Competitions.",
+    description: "Hackathon entries, evaluation challenges, and leaderboards.",
+    descriptionLong:
+      "Hackathon entries, evaluation challenges, and leaderboard submissions worth writing up.",
+  },
+} as const;
+
+type Kind = keyof typeof KIND_META;
+
+export async function getStaticPaths() {
+  return Object.keys({
+    publications: null,
+    datasets: null,
+    competitions: null,
+  }).map((kind) => ({ params: { kind } }));
+}
+
+const { kind } = Astro.params as { kind: Kind };
+const meta = KIND_META[kind];
+
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const kindProjects = allProjects.filter((p) => p.data.kind === meta.singular);
+const featured = kindProjects.filter((p) => p.data.featured);
+const rest = kindProjects.filter((p) => !p.data.featured);
+
+const tabs = [
+  { label: "All", href: "/projects", key: null, count: allProjects.length },
+  {
+    label: "Publications",
+    href: "/projects/publications",
+    key: "publications" as const,
+    count: allProjects.filter((p) => p.data.kind === "publication").length,
+  },
+  {
+    label: "Datasets",
+    href: "/projects/datasets",
+    key: "datasets" as const,
+    count: allProjects.filter((p) => p.data.kind === "dataset").length,
+  },
+  {
+    label: "Competitions",
+    href: "/projects/competitions",
+    key: "competitions" as const,
+    count: allProjects.filter((p) => p.data.kind === "competition").length,
+  },
+];
+---
+
+<BaseLayout title={meta.label} description={meta.description}>
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-10 py-20 lg:py-28">
+      <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">{meta.label}</p>
+      <h1 class="max-w-4xl font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-ink md:text-6xl">
+        {meta.h1}
+      </h1>
+      <p class="max-w-2xl text-lg text-body">{meta.descriptionLong}</p>
+    </Container>
+  </section>
+
+  <section class="border-b border-border">
+    <Container as="div" class="py-10">
+      <nav
+        class="flex flex-wrap items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface p-1.5"
+        aria-label="Filter projects by kind"
+      >
+        {
+          tabs.map((tab) => (
+            <a
+              href={tab.href}
+              class:list={[
+                "inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-5 py-2.5 text-sm transition-colors",
+                tab.key === kind
+                  ? "bg-accent text-accent-ink"
+                  : "text-body hover:text-ink",
+              ]}
+              aria-current={tab.key === kind ? "page" : undefined}
+            >
+              {tab.label}
+              <span class="rounded-[var(--radius-pill)] bg-bg/40 px-2 py-0.5 text-xs text-muted">
+                {tab.count}
+              </span>
+            </a>
+          ))
+        }
+      </nav>
+    </Container>
+  </section>
+
+  {
+    kindProjects.length === 0 ? (
+      <section>
+        <Container as="div" class="py-24 text-center">
+          <p class="text-lg text-muted">No {meta.label.toLowerCase()} yet. Come back soon.</p>
+        </Container>
+      </section>
+    ) : (
+      <>
+        {featured.length > 0 && (
+          <section class="border-b border-border">
+            <Container as="div" class="flex flex-col gap-6 py-16">
+              {featured.map((project) => (
+                <ProjectCard project={project} variant="featured" />
+              ))}
+            </Container>
+          </section>
+        )}
+
+        {rest.length > 0 && (
+          <section>
+            <Container as="div" class="py-16">
+              <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {rest.map((project) => (
+                  <ProjectCard project={project} />
+                ))}
+              </div>
+            </Container>
+          </section>
+        )}
+      </>
+    )
+  }
+</BaseLayout>

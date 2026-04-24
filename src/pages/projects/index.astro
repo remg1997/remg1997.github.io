@@ -20,10 +20,10 @@ const stats = [
 ];
 
 const kinds = [
-  { label: "All", value: null, count: projects.length },
-  { label: "Publications", value: "publication", count: projects.filter((p) => p.data.kind === "publication").length },
-  { label: "Datasets", value: "dataset", count: projects.filter((p) => p.data.kind === "dataset").length },
-  { label: "Competitions", value: "competition", count: projects.filter((p) => p.data.kind === "competition").length },
+  { label: "All", href: "/projects", active: true, count: projects.length },
+  { label: "Publications", href: "/projects/publications", active: false, count: projects.filter((p) => p.data.kind === "publication").length },
+  { label: "Datasets", href: "/projects/datasets", active: false, count: projects.filter((p) => p.data.kind === "dataset").length },
+  { label: "Competitions", href: "/projects/competitions", active: false, count: projects.filter((p) => p.data.kind === "competition").length },
 ];
 ---
 
@@ -79,18 +79,19 @@ const kinds = [
               </div>
               <nav class="flex flex-wrap items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface p-1.5" aria-label="Filter projects by kind">
                 {kinds.map((k) => (
-                  <button
-                    type="button"
+                  <a
+                    href={k.href}
                     class:list={[
                       "inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-5 py-2.5 text-sm transition-colors",
-                      k.value === null ? "bg-accent text-accent-ink" : "text-body hover:text-ink",
+                      k.active ? "bg-accent text-accent-ink" : "text-body hover:text-ink",
                     ]}
+                    aria-current={k.active ? "page" : undefined}
                   >
                     {k.label}
                     <span class="rounded-[var(--radius-pill)] bg-bg/40 px-2 py-0.5 text-xs text-muted">
                       {k.count}
                     </span>
-                  </button>
+                  </a>
                 ))}
               </nav>
             </div>

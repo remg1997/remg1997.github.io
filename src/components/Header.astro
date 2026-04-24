@@ -22,10 +22,11 @@ const isActive = (href: string) => {
 <header class="sticky top-0 z-40 flex w-full flex-col border-b border-border bg-surface/80 backdrop-blur-md">
   <div class="flex w-full items-center justify-center gap-2 border-b border-border bg-bg/90 px-6 py-3">
     <p class="text-sm text-body">
-      Subscribe for deep dives, explainers, and honest ML engineering notes.
+      Follow via RSS for deep dives, explainers, and honest ML engineering notes.
     </p>
-    <a href="#newsletter" class="text-accent transition-colors hover:text-accent/80" aria-label="Go to newsletter">
-      <Icon name="arrow-up-right" size={16} />
+    <a href="/rss.xml" class="inline-flex items-center gap-1 text-accent transition-colors hover:text-accent/80" aria-label="Subscribe via RSS">
+      <Icon name="rss" size={14} />
+      <Icon name="arrow-up-right" size={14} />
     </a>
   </div>
 

@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Container from "../../components/Container.astro";
+import PostCard from "../../components/PostCard.astro";
+import Icon from "../../components/Icon.astro";
+import { getCollection } from "astro:content";
+
+const allPosts = (await getCollection("posts", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+
+const trackPosts = allPosts.filter((p) => p.data.track === "everyone");
+const featured = trackPosts[0];
+const secondary = trackPosts.slice(1, 4);
+
+const counts = {
+  all: allPosts.length,
+  engineers: allPosts.filter((p) => p.data.track === "engineers").length,
+  everyone: trackPosts.length,
+};
+
+const tabs = [
+  { label: "All", track: null, href: "/posts", count: counts.all },
+  { label: "For Engineers", track: "engineers", href: "/posts/engineers", count: counts.engineers },
+  { label: "For Everyone", track: "everyone", href: "/posts/everyone", count: counts.everyone },
+];
+---
+
+<BaseLayout
+  title="For Everyone"
+  description="Plain-English explainers of how AI shapes daily life. No PhD required, no jargon walls."
+>
+  <section class="border-b border-border">
+    <Container as="div" class="flex flex-col gap-8 py-20 lg:py-28">
+      <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">For Everyone</p>
+      <h1 class="max-w-3xl font-display text-4xl font-medium leading-[1.1] tracking-[-0.02em] text-ink md:text-6xl">
+        Accessible explainers, no PhD required.
+      </h1>
+      <p class="max-w-2xl text-lg text-body">
+        Plain-English explanations of how AI actually works and affects daily life. Analogies that stick, jargon pruned to the load-bearing minimum.
+      </p>
+    </Container>
+  </section>
+
+  {
+    trackPosts.length === 0 ? (
+      <section>
+        <Container as="div" class="py-24 text-center">
+          <p class="text-lg text-muted">No everyone-track posts yet. Come back soon.</p>
+        </Container>
+      </section>
+    ) : (
+      <>
+        {featured && (
+          <section class="border-b border-border">
+            <Container as="div" class="py-16 lg:py-20">
+              <PostCard post={featured} variant="featured" />
+            </Container>
+          </section>
+        )}
+
+        {secondary.length > 0 && (
+          <section class="border-b border-border">
+            <Container as="div" class="py-16">
+              <div class="grid grid-cols-1 gap-10 md:grid-cols-3">
+                {secondary.map((post) => (
+                  <PostCard post={post} />
+                ))}
+              </div>
+            </Container>
+          </section>
+        )}
+
+        <section>
+          <Container as="div" class="flex flex-col gap-10 py-20">
+            <div class="flex flex-wrap items-end justify-between gap-6">
+              <div class="space-y-3">
+                <p class="text-sm font-medium uppercase tracking-[0.08em] text-muted">Tune in to the details</p>
+                <h2 class="font-display text-3xl font-medium leading-tight tracking-tight text-ink md:text-4xl">
+                  All everyone-track posts.
+                </h2>
+              </div>
+              <a
+                href="/rss.xml"
+                class="inline-flex items-center gap-2 rounded-[var(--radius)] border border-border bg-surface px-5 py-3 text-sm text-body transition-colors hover:border-border-subtle hover:text-ink"
+              >
+                Subscribe via RSS
+                <Icon name="rss" size={16} />
+              </a>
+            </div>
+
+            <nav class="flex flex-wrap items-center gap-2 rounded-[var(--radius-pill)] border border-border bg-surface p-1.5" aria-label="Filter posts by track">
+              {tabs.map((tab) => (
+                <a
+                  href={tab.href}
+                  class:list={[
+                    "inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-5 py-2.5 text-sm transition-colors",
+                    tab.track === "everyone"
+                      ? "bg-accent text-accent-ink"
+                      : "text-body hover:text-ink",
+                  ]}
+                  aria-current={tab.track === "everyone" ? "page" : undefined}
+                >
+                  {tab.label}
+                  <span class="rounded-[var(--radius-pill)] bg-bg/40 px-2 py-0.5 text-xs text-muted">
+                    {tab.count}
+                  </span>
+                </a>
+              ))}
+            </nav>
+
+            <div class="divide-y divide-border">
+              {trackPosts.map((post) => (
+                <PostCard post={post} variant="row" />
+              ))}
+            </div>
+          </Container>
+        </section>
+      </>
+    )
+  }
+</BaseLayout>
