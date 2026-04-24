@@ -8,7 +8,7 @@ author: "rafael"
 image: ./iclr-2026-llm-reasoning-orals/revela-figure-1-framework.png
 ---
 
-The first oral session on Day 1 of ICLR 2026 was LLMs and Reasoning. Five talks back to back. What follows is my set of notes from the session.
+For the  first oral  on Day 1 of ICLR 2026 I decided to attend the LLMs and Reasoning session. Five talks back to back. What follows is my set of notes from the session.
 
 ## Reducing Belief Deviation in RL for Active Reasoning of LLM Agents
 

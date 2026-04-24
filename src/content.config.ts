@@ -19,7 +19,10 @@ const posts = defineCollection({
 });
 
 const projects = defineCollection({
-  loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/projects" }),
+  loader: glob({
+    pattern: ["**/*.{md,mdx}", "!README.md"],
+    base: "./src/content/projects",
+  }),
   schema: ({ image }) =>
     z.object({
       title: z.string(),

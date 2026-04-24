@@ -60,10 +60,8 @@ Clear, accessible explainers of how ML shapes daily life — no PhD required, no
 
 ## Why "The Artificial Engineer"?
 
-I'm not a "real" engineer by degree, but I've spent four years making AI systems work in the real world. The name captures the irony: someone artificial (by training) engineering artificial intelligence.
+I'm not a "real" engineer by degree, but I've spent some time making AI systems work in the real world. The name captures the irony: someone artificial (by training) engineering artificial intelligence.
 
 ## Join the Conversation
 
-I'll be posting **twice a month** (one per track). But I want this to be a dialogue, not a broadcast.
-
-Every ML engineer has that moment when the tutorial ends and reality begins. I'm documenting everything that happens next — the debugging, the scaling, the "why didn't anyone mention this?" moments. Subscribe below to follow along.
+I'll be posting often, hopefully. But I want this to be a dialogue, not a broadcast.
